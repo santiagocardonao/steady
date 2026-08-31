@@ -14,7 +14,219 @@ export type Database = {
   }
   public: {
     Tables: {
-      [_ in never]: never
+      agua: {
+        Row: {
+          creado_en: string
+          fecha: string
+          id: string
+          user_id: string
+          vasos: number
+        }
+        Insert: {
+          creado_en?: string
+          fecha?: string
+          id?: string
+          user_id: string
+          vasos?: number
+        }
+        Update: {
+          creado_en?: string
+          fecha?: string
+          id?: string
+          user_id?: string
+          vasos?: number
+        }
+        Relationships: []
+      }
+      categorias: {
+        Row: {
+          id: number
+          nombre: string
+          orden: number
+          tipo: string
+        }
+        Insert: {
+          id?: number
+          nombre: string
+          orden?: number
+          tipo: string
+        }
+        Update: {
+          id?: number
+          nombre?: string
+          orden?: number
+          tipo?: string
+        }
+        Relationships: []
+      }
+      ejercicios: {
+        Row: {
+          categoria_id: number
+          creado_en: string
+          es_default: boolean
+          id: string
+          nombre: string
+          user_id: string | null
+        }
+        Insert: {
+          categoria_id: number
+          creado_en?: string
+          es_default?: boolean
+          id?: string
+          nombre: string
+          user_id?: string | null
+        }
+        Update: {
+          categoria_id?: number
+          creado_en?: string
+          es_default?: boolean
+          id?: string
+          nombre?: string
+          user_id?: string | null
+        }
+        Relationships: [
+          {
+            foreignKeyName: "ejercicios_categoria_id_fkey"
+            columns: ["categoria_id"]
+            isOneToOne: false
+            referencedRelation: "categorias"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      entrenamientos: {
+        Row: {
+          creado_en: string
+          duracion_min: number | null
+          ejercicio_id: string
+          fecha: string
+          id: string
+          notas: string | null
+          rpe: number | null
+          tipo: string
+          user_id: string
+        }
+        Insert: {
+          creado_en?: string
+          duracion_min?: number | null
+          ejercicio_id: string
+          fecha?: string
+          id?: string
+          notas?: string | null
+          rpe?: number | null
+          tipo: string
+          user_id: string
+        }
+        Update: {
+          creado_en?: string
+          duracion_min?: number | null
+          ejercicio_id?: string
+          fecha?: string
+          id?: string
+          notas?: string | null
+          rpe?: number | null
+          tipo?: string
+          user_id?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "entrenamientos_ejercicio_id_fkey"
+            columns: ["ejercicio_id"]
+            isOneToOne: false
+            referencedRelation: "ejercicios"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      perfiles: {
+        Row: {
+          creado_en: string
+          estatura_cm: number | null
+          id: string
+          meta_agua_vasos: number
+          meta_peso: string | null
+          nombre: string | null
+          peso_objetivo_kg: number | null
+        }
+        Insert: {
+          creado_en?: string
+          estatura_cm?: number | null
+          id: string
+          meta_agua_vasos?: number
+          meta_peso?: string | null
+          nombre?: string | null
+          peso_objetivo_kg?: number | null
+        }
+        Update: {
+          creado_en?: string
+          estatura_cm?: number | null
+          id?: string
+          meta_agua_vasos?: number
+          meta_peso?: string | null
+          nombre?: string | null
+          peso_objetivo_kg?: number | null
+        }
+        Relationships: []
+      }
+      peso_corporal: {
+        Row: {
+          creado_en: string
+          fecha: string
+          id: string
+          peso_kg: number
+          user_id: string
+        }
+        Insert: {
+          creado_en?: string
+          fecha?: string
+          id?: string
+          peso_kg: number
+          user_id: string
+        }
+        Update: {
+          creado_en?: string
+          fecha?: string
+          id?: string
+          peso_kg?: number
+          user_id?: string
+        }
+        Relationships: []
+      }
+      series: {
+        Row: {
+          entrenamiento_id: string
+          id: string
+          numero_serie: number
+          peso_kg: number | null
+          repeticiones: number | null
+          user_id: string
+        }
+        Insert: {
+          entrenamiento_id: string
+          id?: string
+          numero_serie: number
+          peso_kg?: number | null
+          repeticiones?: number | null
+          user_id: string
+        }
+        Update: {
+          entrenamiento_id?: string
+          id?: string
+          numero_serie?: number
+          peso_kg?: number | null
+          repeticiones?: number | null
+          user_id?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "series_entrenamiento_id_fkey"
+            columns: ["entrenamiento_id"]
+            isOneToOne: false
+            referencedRelation: "entrenamientos"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
     }
     Views: {
       [_ in never]: never
