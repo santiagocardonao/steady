@@ -1,24 +1,54 @@
 import { createFileRoute } from "@tanstack/react-router";
+import { useState } from "react";
+import { AppShell, PageHeader, SegmentedControl } from "@/components/olmo/AppShell";
+import { PesoPanel } from "@/components/medicion/PesoPanel";
+import { AguaPanel } from "@/components/medicion/AguaPanel";
+import { EjerciciosPanel } from "@/components/medicion/EjerciciosPanel";
 
-// No head() here: the home route inherits title/description/og/twitter from
-// __root.tsx, and ships no og:image so serve-time hosting can inject the
-// project's social preview (explicit og:image or latest screenshot).
 export const Route = createFileRoute("/")({
-  component: Index,
+  head: () => ({
+    meta: [
+      { title: "Medición — Olmo Gym" },
+      {
+        name: "description",
+        content:
+          "Registra en segundos tu peso corporal, los vasos de agua del día y cada ejercicio del gimnasio con series, peso y cardio.",
+      },
+      { property: "og:title", content: "Medición — Olmo Gym" },
+      {
+        property: "og:description",
+        content: "Registro rápido de peso, agua y ejercicios en Olmo Gym.",
+      },
+    ],
+  }),
+  component: MedicionPage,
 });
 
-// IMPORTANT: Replace this placeholder. See ./README.md for routing conventions.
-function Index() {
+type Segmento = "peso" | "agua" | "ejercicios";
+
+function MedicionPage() {
+  const [segmento, setSegmento] = useState<Segmento>("peso");
+
   return (
-    <div
-      className="flex min-h-screen items-center justify-center"
-      style={{ backgroundColor: "#fcfbf8" }}
-    >
-      <img
-        data-lovable-blank-page-placeholder="REMOVE_THIS"
-        src="https://cdn.gpteng.co/blank-app-v1.svg"
-        alt="Your app will live here!"
+    <AppShell>
+      <PageHeader
+        eyebrow="Medición"
+        titulo="Registra tu"
+        enfasis="día"
+        descripcion="Anota lo de hoy en pocos toques."
       />
-    </div>
+      <SegmentedControl<Segmento>
+        valor={segmento}
+        onChange={setSegmento}
+        opciones={[
+          { valor: "peso", etiqueta: "Peso" },
+          { valor: "agua", etiqueta: "Agua" },
+          { valor: "ejercicios", etiqueta: "Ejercicios" },
+        ]}
+      />
+      {segmento === "peso" ? <PesoPanel /> : null}
+      {segmento === "agua" ? <AguaPanel /> : null}
+      {segmento === "ejercicios" ? <EjerciciosPanel /> : null}
+    </AppShell>
   );
 }
