@@ -11,6 +11,7 @@
 import { Route as rootRouteImport } from './routes/__root'
 import { Route as IndexRouteImport } from './routes/index'
 import { Route as AuthRouteImport } from './routes/auth'
+import { Route as DashboardsRouteImport } from './routes/dashboards'
 import { Route as PerfilRouteImport } from './routes/perfil'
 
 const IndexRoute = IndexRouteImport.update({
@@ -23,6 +24,11 @@ const AuthRoute = AuthRouteImport.update({
   path: '/auth',
   getParentRoute: () => rootRouteImport,
 } as any)
+const DashboardsRoute = DashboardsRouteImport.update({
+  id: '/dashboards',
+  path: '/dashboards',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const PerfilRoute = PerfilRouteImport.update({
   id: '/perfil',
   path: '/perfil',
@@ -32,30 +38,34 @@ const PerfilRoute = PerfilRouteImport.update({
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
   '/auth': typeof AuthRoute
+  '/dashboards': typeof DashboardsRoute
   '/perfil': typeof PerfilRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
   '/auth': typeof AuthRoute
+  '/dashboards': typeof DashboardsRoute
   '/perfil': typeof PerfilRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
   '/auth': typeof AuthRoute
+  '/dashboards': typeof DashboardsRoute
   '/perfil': typeof PerfilRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
-  fullPaths: '/' | '/auth' | '/perfil'
+  fullPaths: '/' | '/auth' | '/dashboards' | '/perfil'
   fileRoutesByTo: FileRoutesByTo
-  to: '/' | '/auth' | '/perfil'
-  id: '__root__' | '/' | '/auth' | '/perfil'
+  to: '/' | '/auth' | '/dashboards' | '/perfil'
+  id: '__root__' | '/' | '/auth' | '/dashboards' | '/perfil'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
   AuthRoute: typeof AuthRoute
+  DashboardsRoute: typeof DashboardsRoute
   PerfilRoute: typeof PerfilRoute
 }
 
@@ -75,6 +85,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof AuthRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/dashboards': {
+      id: '/dashboards'
+      path: '/dashboards'
+      fullPath: '/dashboards'
+      preLoaderRoute: typeof DashboardsRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/perfil': {
       id: '/perfil'
       path: '/perfil'
@@ -88,6 +105,7 @@ declare module '@tanstack/react-router' {
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
   AuthRoute: AuthRoute,
+  DashboardsRoute: DashboardsRoute,
   PerfilRoute: PerfilRoute,
 }
 export const routeTree = rootRouteImport
