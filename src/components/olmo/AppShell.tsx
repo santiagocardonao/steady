@@ -122,7 +122,7 @@ export function Metrica({
   etiqueta,
 }: {
   valor: string | number;
-  unidad?: string;
+  unidad?: string | undefined;
   etiqueta: string;
 }) {
   return (
