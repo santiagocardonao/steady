@@ -1,4 +1,4 @@
-import { createFileRoute, useNavigate } from "@tanstack/react-router";
+import { createFileRoute, Link, useNavigate } from "@tanstack/react-router";
 import { useEffect, useState } from "react";
 import { toast } from "sonner";
 import { SignOut } from "@phosphor-icons/react";
@@ -198,6 +198,9 @@ function PerfilPage() {
         <button type="button" className="ui-btn-ghost w-full" onClick={salir}>
           <SignOut size={18} weight="fill" /> Cerrar sesión
         </button>
+        <Link to="/about" className="block min-h-11 py-3 text-center text-sm font-semibold text-gray-500">
+          About
+        </Link>
       </div>
     </AppShell>
   );

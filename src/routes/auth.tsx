@@ -1,8 +1,9 @@
-import { createFileRoute, useNavigate } from "@tanstack/react-router";
+import { createFileRoute, Link, useNavigate } from "@tanstack/react-router";
 import { useEffect, useState } from "react";
 import { toast } from "sonner";
 import { supabase } from "@/integrations/supabase/client";
 import { useAuth } from "@/lib/auth";
+import { iniciarDemo } from "@/lib/demo";
 
 export const Route = createFileRoute("/auth")({
   head: () => ({
@@ -20,22 +21,37 @@ export const Route = createFileRoute("/auth")({
       },
     ],
   }),
+  validateSearch: (s: Record<string, unknown>): { modo?: "registro" } =>
+    s["modo"] === "registro" ? { modo: "registro" } : {},
   component: AuthPage,
 });
 
 type Modo = "entrar" | "registro" | "recuperar";
 
 function AuthPage() {
-  const [modo, setModo] = useState<Modo>("entrar");
+  const search = Route.useSearch();
+  const [modo, setModo] = useState<Modo>(search.modo ?? "entrar");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [enviando, setEnviando] = useState(false);
+  const [demoCargando, setDemoCargando] = useState(false);
   const { session, cargando } = useAuth();
   const navigate = useNavigate();
 
   useEffect(() => {
-    if (!cargando && session) navigate({ to: "/", replace: true });
-  }, [cargando, session, navigate]);
+    if (!cargando && session && !demoCargando) navigate({ to: "/", replace: true });
+  }, [cargando, session, navigate, demoCargando]);
+
+  const probarDemo = async () => {
+    setDemoCargando(true);
+    try {
+      await iniciarDemo();
+      navigate({ to: "/dashboards", replace: true });
+    } catch (error) {
+      setDemoCargando(false);
+      toast.error(error instanceof Error ? error.message : "No pudimos abrir la demo.");
+    }
+  };
 
   const enviar = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -68,9 +84,15 @@ function AuthPage() {
   };
 
   return (
-    <main className="flex min-h-screen flex-col justify-center bg-canvas px-5 py-10">
+    <main className="relative flex min-h-screen flex-col justify-center bg-canvas px-5 py-10">
+      <Link
+        to="/about"
+        className="absolute top-4 right-5 flex min-h-11 items-center text-sm font-semibold text-gray-500"
+      >
+        About
+      </Link>
       <div className="mx-auto w-full max-w-md">
-        <p className="text-2xl font-extrabold tracking-tight lowercase text-brand-gradient">
+        <p className="text-2xl font-extrabold tracking-tighter lowercase text-brand-gradient">
           steady
         </p>
         <h1 className="mt-4 text-[2.1rem] leading-[1.05] font-extralight text-ink">
@@ -149,6 +171,18 @@ function AuthPage() {
             {modo === "recuperar" ? "Volver a iniciar sesión" : "Olvidé mi contraseña"}
           </button>
         </form>
+
+        <button
+          type="button"
+          className="ui-btn-light mt-5 w-full"
+          disabled={demoCargando}
+          onClick={probarDemo}
+        >
+          {demoCargando ? "Preparando la demo…" : "Probar la demo"}
+        </button>
+        <p className="mt-2 text-center text-xs text-gray-500">
+          Sin registro. Datos de ejemplo, se borran en 24 horas.
+        </p>
       </div>
     </main>
   );
