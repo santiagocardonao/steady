@@ -1,7 +1,11 @@
 import { Link, useNavigate, useRouterState } from "@tanstack/react-router";
-import { useEffect, type ReactNode } from "react";
+import { useEffect, useState, type ReactNode } from "react";
 import { UserCircle, ChartLineUp, PlusCircle } from "@phosphor-icons/react";
+import { useQueryClient } from "@tanstack/react-query";
 import { useAuth } from "@/lib/auth";
+import { supabase } from "@/integrations/supabase/client";
+import { usePerfil } from "@/lib/data";
+import { Onboarding } from "@/components/layout/Onboarding";
 
 const enlaces = [
   { to: "/perfil", etiqueta: "Perfil", Icono: UserCircle },
@@ -12,7 +16,11 @@ const enlaces = [
 export function AppShell({ children }: { children: ReactNode }) {
   const { session, cargando } = useAuth();
   const navigate = useNavigate();
+  const qc = useQueryClient();
   const pathname = useRouterState({ select: (s) => s.location.pathname });
+  const { data: perfil, isSuccess } = usePerfil();
+  const [saltado, setSaltado] = useState(false);
+  const esDemo = !!session?.user.is_anonymous;
 
   useEffect(() => {
     if (!cargando && !session) navigate({ to: "/auth", replace: true });
@@ -26,8 +34,33 @@ export function AppShell({ children }: { children: ReactNode }) {
     );
   }
 
+  if (!esDemo && isSuccess && !saltado && !perfil?.nombre && !perfil?.estatura_cm) {
+    return (
+      <Onboarding
+        onTerminar={() => {
+          setSaltado(true);
+          navigate({ to: "/" });
+        }}
+      />
+    );
+  }
+
+  const crearCuenta = async () => {
+    await supabase.auth.signOut();
+    qc.clear();
+    navigate({ to: "/auth", search: { modo: "registro" } as never });
+  };
+
   return (
-    <div className="min-h-screen bg-canvas pb-28">
+    <div className={`min-h-screen bg-canvas pb-28 ${esDemo ? "pt-9" : ""}`}>
+      {esDemo ? (
+        <div className="fixed inset-x-0 top-0 z-50 flex h-9 items-center justify-center gap-2 bg-violet-tint px-3 text-xs font-semibold text-violet-strong">
+          <span>Estás en modo demo · Los datos se borran en 24 h</span>
+          <button type="button" onClick={crearCuenta} className="underline underline-offset-2">
+            Crear cuenta
+          </button>
+        </div>
+      ) : null}
       <div className="mx-auto w-full max-w-xl px-4 pt-6">{children}</div>
 
       <nav className="fixed bottom-4 left-1/2 z-50 w-[calc(100%-2rem)] max-w-md -translate-x-1/2">
@@ -138,10 +171,17 @@ export function Metrica({
   );
 }
 
-export function EstadoVacio({ texto }: { texto?: string }) {
+export function EstadoVacio({ texto, enlace }: { texto?: string; enlace?: boolean }) {
   return (
-    <p className="py-6 text-center text-sm text-gray-500">
-      {texto ?? "Aún no hay datos, empieza registrando en Medición."}
-    </p>
+    <div className="py-6 text-center">
+      <p className="text-sm text-gray-500">
+        {texto ?? "Todavía no hay nada aquí. Tu primer registro toma segundos."}
+      </p>
+      {enlace ? (
+        <Link to="/" className="ui-btn-light mt-4">
+          Registrar ahora
+        </Link>
+      ) : null}
+    </div>
   );
 }
