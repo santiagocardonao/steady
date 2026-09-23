@@ -3,7 +3,7 @@
 @import "tw-animate-css";
 
 /*
- * Sistema de diseño OLMO — solo modo claro.
+ * Sistema de diseño Steady — solo modo claro.
  * Violeta → índigo, canvas gris claro, tarjetas blancas, pills y sombras suaves.
  */
 
@@ -57,7 +57,7 @@
   --dur-fast: 150ms;
   --dur-base: 220ms;
 
-  /* Tokens semánticos (shadcn) mapeados a OLMO */
+  /* Tokens semánticos (shadcn) mapeados a Steady */
   --background: var(--canvas);
   --foreground: var(--ink);
   --card: var(--white);
@@ -213,14 +213,14 @@
   letter-spacing: -0.01em;
 }
 
-@utility olmo-card {
+@utility ui-card {
   background-color: var(--white);
   border-radius: var(--radius-xl);
   box-shadow: var(--shadow-md);
   padding: 1.25rem;
 }
 
-@utility olmo-cta {
+@utility ui-cta {
   display: inline-flex;
   align-items: center;
   justify-content: center;
@@ -245,7 +245,7 @@
   }
 }
 
-@utility olmo-btn-ink {
+@utility ui-btn-ink {
   display: inline-flex;
   align-items: center;
   justify-content: center;
@@ -265,7 +265,7 @@
   }
 }
 
-@utility olmo-btn-light {
+@utility ui-btn-light {
   display: inline-flex;
   align-items: center;
   justify-content: center;
@@ -284,7 +284,7 @@
   }
 }
 
-@utility olmo-btn-ghost {
+@utility ui-btn-ghost {
   display: inline-flex;
   align-items: center;
   justify-content: center;
@@ -303,7 +303,7 @@
   }
 }
 
-@utility olmo-input {
+@utility ui-input {
   width: 100%;
   min-height: 48px;
   padding: 0.75rem 1rem;
@@ -320,7 +320,7 @@
   }
 }
 
-@utility olmo-label {
+@utility ui-label {
   display: block;
   margin-bottom: 0.375rem;
   font-size: 0.75rem;
@@ -330,7 +330,7 @@
   color: var(--gray-500);
 }
 
-@utility olmo-eyebrow {
+@utility ui-eyebrow {
   display: inline-flex;
   align-items: center;
   gap: 0.375rem;

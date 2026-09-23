@@ -1,6 +1,6 @@
 {
-  "name": "Olmo Gym",
-  "short_name": "Olmo Gym",
+  "name": "Steady",
+  "short_name": "Steady",
   "description": "Registra peso, agua y ejercicios del gimnasio y sigue tu progreso.",
   "start_url": "/",
   "scope": "/",
@@ -23,7 +23,7 @@
       "purpose": "any"
     },
     {
-      "src": "/icon-512.png",
+      "src": "/icon-maskable-512.png",
       "sizes": "512x512",
       "type": "image/png",
       "purpose": "maskable"

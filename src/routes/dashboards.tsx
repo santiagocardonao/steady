@@ -12,7 +12,7 @@ import {
   YAxis,
 } from "recharts";
 import { ArrowDown, ArrowUp } from "@phosphor-icons/react";
-import { AppShell, Card, EstadoVacio, Metrica, PageHeader } from "@/components/olmo/AppShell";
+import { AppShell, Card, EstadoVacio, Metrica, PageHeader } from "@/components/layout/AppShell";
 import {
   fechaCorta,
   hoyISO,
@@ -21,18 +21,18 @@ import {
   useEntrenamientos,
   usePerfil,
   usePesos,
-} from "@/lib/olmo";
+} from "@/lib/data";
 
 export const Route = createFileRoute("/dashboards")({
   head: () => ({
     meta: [
-      { title: "Dashboards — Olmo Gym" },
+      { title: "Dashboards — Steady" },
       {
         name: "description",
         content:
           "Frecuencia de entrenamiento, racha, tendencia de peso, cumplimiento de agua, minutos de cardio y progresión de fuerza por ejercicio.",
       },
-      { property: "og:title", content: "Dashboards — Olmo Gym" },
+      { property: "og:title", content: "Dashboards — Steady" },
       {
         property: "og:description",
         content: "Todo tu progreso del gimnasio en gráficas claras.",
@@ -205,7 +205,7 @@ function DashboardsPage() {
               <CalendarioAsistencia dias={new Set(todosLosDias)} />
             </>
           ) : (
-            <EstadoVacio />
+            <EstadoVacio enlace />
           )}
         </Card>
 
@@ -257,7 +257,7 @@ function DashboardsPage() {
               </div>
             </>
           ) : (
-            <EstadoVacio />
+            <EstadoVacio enlace />
           )}
         </Card>
 
@@ -284,7 +284,7 @@ function DashboardsPage() {
               <p className="mt-2 text-xs text-gray-500">Meta diaria: {meta} vasos.</p>
             </>
           ) : (
-            <EstadoVacio />
+            <EstadoVacio enlace />
           )}
         </Card>
 
@@ -309,7 +309,7 @@ function DashboardsPage() {
               </div>
             </>
           ) : (
-            <EstadoVacio texto="Aún no hay cardio registrado en este periodo." />
+            <EstadoVacio texto="Aún no hay cardio registrado en este periodo." enlace />
           )}
         </Card>
 
@@ -317,12 +317,12 @@ function DashboardsPage() {
           <h2 className="mb-3 text-base font-semibold text-ink">Progresión de fuerza</h2>
           {ejerciciosFuerza.length ? (
             <>
-              <label className="olmo-label" htmlFor="ejercicio">
+              <label className="ui-label" htmlFor="ejercicio">
                 Ejercicio
               </label>
               <select
                 id="ejercicio"
-                className="olmo-input"
+                className="ui-input"
                 value={idSel}
                 onChange={(e) => setEjercicioSel(e.target.value)}
               >
@@ -370,11 +370,11 @@ function DashboardsPage() {
                   </ResponsiveContainer>
                 </div>
               ) : (
-                <EstadoVacio texto="Sin registros de este ejercicio en el periodo." />
+                <EstadoVacio texto="Sin registros de este ejercicio en el periodo." enlace />
               )}
             </>
           ) : (
-            <EstadoVacio texto="Registra ejercicios de fuerza para ver tu progresión." />
+            <EstadoVacio texto="Registra ejercicios de fuerza para ver tu progresión." enlace />
           )}
         </Card>
       </div>
@@ -429,7 +429,7 @@ function CalendarioAsistencia({ dias }: { dias: Set<string> }) {
 
   return (
     <div className="mt-5">
-      <p className="olmo-label">
+      <p className="ui-label">
         {primerDia.toLocaleDateString("es-CO", { month: "long", year: "numeric" })}
       </p>
       <div className="grid grid-cols-7 gap-1.5">

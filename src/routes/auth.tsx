@@ -1,41 +1,57 @@
-import { createFileRoute, useNavigate } from "@tanstack/react-router";
+import { createFileRoute, Link, useNavigate } from "@tanstack/react-router";
 import { useEffect, useState } from "react";
 import { toast } from "sonner";
 import { supabase } from "@/integrations/supabase/client";
 import { useAuth } from "@/lib/auth";
+import { iniciarDemo } from "@/lib/demo";
 
 export const Route = createFileRoute("/auth")({
   head: () => ({
     meta: [
-      { title: "Entrar — Olmo Gym" },
+      { title: "Entrar — Steady" },
       {
         name: "description",
         content:
-          "Crea tu cuenta o inicia sesión en Olmo Gym para llevar el seguimiento de tu progreso en el gimnasio.",
+          "Crea tu cuenta o inicia sesión en Steady para llevar el seguimiento de tu progreso en el gimnasio.",
       },
-      { property: "og:title", content: "Entrar — Olmo Gym" },
+      { property: "og:title", content: "Entrar — Steady" },
       {
         property: "og:description",
-        content: "Accede a tu cuenta de Olmo Gym y sigue tu progreso.",
+        content: "Accede a tu cuenta de Steady y sigue tu progreso.",
       },
     ],
   }),
+  validateSearch: (s: Record<string, unknown>): { modo?: "registro" } =>
+    s["modo"] === "registro" ? { modo: "registro" } : {},
   component: AuthPage,
 });
 
 type Modo = "entrar" | "registro" | "recuperar";
 
 function AuthPage() {
-  const [modo, setModo] = useState<Modo>("entrar");
+  const search = Route.useSearch();
+  const [modo, setModo] = useState<Modo>(search.modo ?? "entrar");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [enviando, setEnviando] = useState(false);
+  const [demoCargando, setDemoCargando] = useState(false);
   const { session, cargando } = useAuth();
   const navigate = useNavigate();
 
   useEffect(() => {
-    if (!cargando && session) navigate({ to: "/", replace: true });
-  }, [cargando, session, navigate]);
+    if (!cargando && session && !demoCargando) navigate({ to: "/", replace: true });
+  }, [cargando, session, navigate, demoCargando]);
+
+  const probarDemo = async () => {
+    setDemoCargando(true);
+    try {
+      await iniciarDemo();
+      navigate({ to: "/dashboards", replace: true });
+    } catch (error) {
+      setDemoCargando(false);
+      toast.error(error instanceof Error ? error.message : "No pudimos abrir la demo.");
+    }
+  };
 
   const enviar = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -68,10 +84,16 @@ function AuthPage() {
   };
 
   return (
-    <main className="flex min-h-screen flex-col justify-center bg-canvas px-5 py-10">
+    <main className="relative flex min-h-screen flex-col justify-center bg-canvas px-5 py-10">
+      <Link
+        to="/about"
+        className="absolute top-4 right-5 flex min-h-11 items-center text-sm font-semibold text-gray-500"
+      >
+        About
+      </Link>
       <div className="mx-auto w-full max-w-md">
-        <p className="text-2xl font-extrabold tracking-tight lowercase text-brand-gradient">
-          olmo gym
+        <p className="text-2xl font-extrabold tracking-tighter lowercase text-brand-gradient">
+          steady
         </p>
         <h1 className="mt-4 text-[2.1rem] leading-[1.05] font-extralight text-ink">
           Tu progreso,
@@ -80,7 +102,7 @@ function AuthPage() {
           </span>
         </h1>
 
-        <form onSubmit={enviar} className="olmo-card mt-7">
+        <form onSubmit={enviar} className="ui-card mt-7">
           <div className="mb-4 flex gap-1 rounded-pill bg-canvas-soft p-1.5">
             {(
               [
@@ -102,12 +124,12 @@ function AuthPage() {
             ))}
           </div>
 
-          <label className="olmo-label" htmlFor="email">
+          <label className="ui-label" htmlFor="email">
             Correo electrónico
           </label>
           <input
             id="email"
-            className="olmo-input"
+            className="ui-input"
             type="email"
             autoComplete="email"
             required
@@ -117,12 +139,12 @@ function AuthPage() {
 
           {modo !== "recuperar" ? (
             <div className="mt-3">
-              <label className="olmo-label" htmlFor="password">
+              <label className="ui-label" htmlFor="password">
                 Contraseña
               </label>
               <input
                 id="password"
-                className="olmo-input"
+                className="ui-input"
                 type="password"
                 autoComplete={modo === "registro" ? "new-password" : "current-password"}
                 required
@@ -133,7 +155,7 @@ function AuthPage() {
             </div>
           ) : null}
 
-          <button type="submit" className="olmo-cta mt-5 w-full" disabled={enviando}>
+          <button type="submit" className="ui-cta mt-5 w-full" disabled={enviando}>
             {modo === "entrar"
               ? "Iniciar sesión"
               : modo === "registro"
@@ -149,6 +171,18 @@ function AuthPage() {
             {modo === "recuperar" ? "Volver a iniciar sesión" : "Olvidé mi contraseña"}
           </button>
         </form>
+
+        <button
+          type="button"
+          className="ui-btn-light mt-5 w-full"
+          disabled={demoCargando}
+          onClick={probarDemo}
+        >
+          {demoCargando ? "Preparando la demo…" : "Probar la demo"}
+        </button>
+        <p className="mt-2 text-center text-xs text-gray-500">
+          Sin registro. Datos de ejemplo, se borran en 24 horas.
+        </p>
       </div>
     </main>
   );

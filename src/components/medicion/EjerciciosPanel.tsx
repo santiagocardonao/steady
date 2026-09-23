@@ -1,7 +1,7 @@
 import { useMemo, useState } from "react";
 import { toast } from "sonner";
 import { Plus, Trash, ArrowLeft } from "@phosphor-icons/react";
-import { Card, EstadoVacio } from "@/components/olmo/AppShell";
+import { Card, EstadoVacio } from "@/components/layout/AppShell";
 import {
   fechaCorta,
   hoyISO,
@@ -13,7 +13,7 @@ import {
   useGuardarEntrenamiento,
   type Categoria,
   type Ejercicio,
-} from "@/lib/olmo";
+} from "@/lib/data";
 
 type FilaSerie = { repeticiones: string; peso: string };
 
@@ -173,24 +173,24 @@ export function EjerciciosPanel() {
 
           {creando ? (
             <div className="mt-4">
-              <label className="olmo-label" htmlFor="nuevo">
+              <label className="ui-label" htmlFor="nuevo">
                 Nombre del nuevo ejercicio
               </label>
               <input
                 id="nuevo"
-                className="olmo-input"
+                className="ui-input"
                 value={nuevoNombre}
                 onChange={(e) => setNuevoNombre(e.target.value)}
                 placeholder="Ej. Press con banda"
               />
-              <button type="button" className="olmo-cta mt-3 w-full" onClick={crear}>
+              <button type="button" className="ui-cta mt-3 w-full" onClick={crear}>
                 Guardar ejercicio
               </button>
             </div>
           ) : (
             <button
               type="button"
-              className="olmo-btn-ghost mt-4 w-full"
+              className="ui-btn-ghost mt-4 w-full"
               onClick={() => setCreando(true)}
             >
               <Plus size={18} weight="fill" /> Nuevo ejercicio
@@ -224,13 +224,13 @@ export function EjerciciosPanel() {
         </p>
 
         <div className="mt-4">
-          <label className="olmo-label" htmlFor="fecha">
+          <label className="ui-label" htmlFor="fecha">
             Fecha
           </label>
           <input
             id="fecha"
             type="date"
-            className="olmo-input"
+            className="ui-input"
             value={fecha}
             onChange={(e) => setFecha(e.target.value)}
           />
@@ -258,7 +258,7 @@ export function EjerciciosPanel() {
                 <div key={i} className="flex items-center gap-2">
                   <span className="w-6 text-sm font-semibold text-gray-400">{i + 1}</span>
                   <input
-                    className="olmo-input"
+                    className="ui-input"
                     type="number"
                     inputMode="numeric"
                     placeholder="Reps"
@@ -270,7 +270,7 @@ export function EjerciciosPanel() {
                     }
                   />
                   <input
-                    className="olmo-input"
+                    className="ui-input"
                     type="number"
                     inputMode="decimal"
                     step="0.5"
@@ -297,7 +297,7 @@ export function EjerciciosPanel() {
             </div>
             <button
               type="button"
-              className="olmo-btn-light mt-3 w-full"
+              className="ui-btn-light mt-3 w-full"
               onClick={() => setSeries((p) => [...p, { repeticiones: "", peso: "" }])}
             >
               <Plus size={18} weight="fill" /> Agregar serie
@@ -306,7 +306,7 @@ export function EjerciciosPanel() {
         ) : (
           <>
             <div className="mt-4">
-              <label className="olmo-label" htmlFor="rpe">
+              <label className="ui-label" htmlFor="rpe">
                 Esfuerzo percibido (RPE): {rpe}
               </label>
               <input
@@ -320,12 +320,12 @@ export function EjerciciosPanel() {
               />
             </div>
             <div className="mt-2">
-              <label className="olmo-label" htmlFor="duracion">
+              <label className="ui-label" htmlFor="duracion">
                 Duración (minutos)
               </label>
               <input
                 id="duracion"
-                className="olmo-input"
+                className="ui-input"
                 type="number"
                 inputMode="numeric"
                 placeholder="Ej. 30"
@@ -337,12 +337,12 @@ export function EjerciciosPanel() {
         )}
 
         <div className="mt-4">
-          <label className="olmo-label" htmlFor="notas">
+          <label className="ui-label" htmlFor="notas">
             Notas (opcional)
           </label>
           <textarea
             id="notas"
-            className="olmo-input min-h-[80px]"
+            className="ui-input min-h-[80px]"
             value={notas}
             onChange={(e) => setNotas(e.target.value)}
           />
@@ -350,7 +350,7 @@ export function EjerciciosPanel() {
 
         <button
           type="button"
-          className="olmo-cta mt-5 w-full"
+          className="ui-cta mt-5 w-full"
           disabled={guardar.isPending}
           onClick={guardarRegistro}
         >
@@ -411,7 +411,7 @@ function HistorialDia({
           ))}
         </ul>
       ) : (
-        <EstadoVacio texto="Sin entrenamientos ese día todavía." />
+        <EstadoVacio texto="Nada registrado este día. Elige un ejercicio arriba y anota tu primera serie." />
       )}
     </Card>
   );
