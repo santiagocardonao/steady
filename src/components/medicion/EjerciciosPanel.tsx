@@ -411,7 +411,7 @@ function HistorialDia({
           ))}
         </ul>
       ) : (
-        <EstadoVacio texto="Sin entrenamientos ese día todavía." />
+        <EstadoVacio texto="Nada registrado este día. Elige un ejercicio arriba y anota tu primera serie." />
       )}
     </Card>
   );

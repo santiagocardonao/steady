@@ -95,7 +95,7 @@ export function PesoPanel() {
             ))}
           </ul>
         ) : (
-          <EstadoVacio texto="Todavía no hay pesos registrados." />
+          <EstadoVacio texto="Aún no hay pesos. Anota el de hoy arriba y empieza tu histórico." />
         )}
       </Card>
     </div>

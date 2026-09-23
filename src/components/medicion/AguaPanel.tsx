@@ -92,7 +92,7 @@ export function AguaPanel() {
             ))}
           </ul>
         ) : (
-          <EstadoVacio texto="Todavía no hay registros de agua." />
+          <EstadoVacio texto="Aún no hay registros. Toca +1 vaso y empieza el día." />
         )}
       </Card>
     </div>

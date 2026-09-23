@@ -205,7 +205,7 @@ function DashboardsPage() {
               <CalendarioAsistencia dias={new Set(todosLosDias)} />
             </>
           ) : (
-            <EstadoVacio />
+            <EstadoVacio enlace />
           )}
         </Card>
 
@@ -257,7 +257,7 @@ function DashboardsPage() {
               </div>
             </>
           ) : (
-            <EstadoVacio />
+            <EstadoVacio enlace />
           )}
         </Card>
 
@@ -284,7 +284,7 @@ function DashboardsPage() {
               <p className="mt-2 text-xs text-gray-500">Meta diaria: {meta} vasos.</p>
             </>
           ) : (
-            <EstadoVacio />
+            <EstadoVacio enlace />
           )}
         </Card>
 
@@ -309,7 +309,7 @@ function DashboardsPage() {
               </div>
             </>
           ) : (
-            <EstadoVacio texto="Aún no hay cardio registrado en este periodo." />
+            <EstadoVacio texto="Aún no hay cardio registrado en este periodo." enlace />
           )}
         </Card>
 
@@ -370,11 +370,11 @@ function DashboardsPage() {
                   </ResponsiveContainer>
                 </div>
               ) : (
-                <EstadoVacio texto="Sin registros de este ejercicio en el periodo." />
+                <EstadoVacio texto="Sin registros de este ejercicio en el periodo." enlace />
               )}
             </>
           ) : (
-            <EstadoVacio texto="Registra ejercicios de fuerza para ver tu progresión." />
+            <EstadoVacio texto="Registra ejercicios de fuerza para ver tu progresión." enlace />
           )}
         </Card>
       </div>
