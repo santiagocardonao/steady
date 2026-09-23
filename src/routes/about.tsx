@@ -109,7 +109,7 @@ function AboutPage() {
             exercises are shared; exercises a user creates are private to that user.
           </Decision>
           <Decision title="Installable.">
-            Steady is a PWA. It installs to the home screen and keeps working when the gym signal is
+            Steady is a PWA. It installs to the home screen and opens even when the gym signal is
             weak.
           </Decision>
           <Decision title="A demo that cannot break.">
