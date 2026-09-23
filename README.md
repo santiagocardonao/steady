@@ -4,7 +4,7 @@
 
 Steady is a mobile web app for tracking gym progress: strength sets, body weight, water and cardio. It was designed for a single real user, an older adult who logs his training on his phone between sets. Every decision in the product follows from what he needed, and from what he did not.
 
-**[Open the app](https://olmo-gym.lovable.app)** · **[About](https://olmo-gym.lovable.app/about)** · Use **"Probar la demo"** on the login screen to explore it with sample data. No sign-up needed.
+**[Open the app](https://steady-gym.lovable.app)** · **[About](https://steady-gym.lovable.app/about)** · Use **"Probar la demo"** on the login screen to explore it with sample data. No sign-up needed.
 
 ---
 
@@ -133,8 +133,8 @@ I wrote the product specification: the user, the flows, the data model, the acce
 ## Run locally
 
 ```sh
-git clone https://github.com/santiagocardonao/olmo-gym.git
-cd olmo-gym
+git clone https://github.com/santiagocardonao/steady.git
+cd steady
 npm install
 npm run dev
 ```
