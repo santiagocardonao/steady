@@ -7,16 +7,16 @@ import { useAuth } from "@/lib/auth";
 export const Route = createFileRoute("/auth")({
   head: () => ({
     meta: [
-      { title: "Entrar — Olmo Gym" },
+      { title: "Entrar — Steady" },
       {
         name: "description",
         content:
-          "Crea tu cuenta o inicia sesión en Olmo Gym para llevar el seguimiento de tu progreso en el gimnasio.",
+          "Crea tu cuenta o inicia sesión en Steady para llevar el seguimiento de tu progreso en el gimnasio.",
       },
-      { property: "og:title", content: "Entrar — Olmo Gym" },
+      { property: "og:title", content: "Entrar — Steady" },
       {
         property: "og:description",
-        content: "Accede a tu cuenta de Olmo Gym y sigue tu progreso.",
+        content: "Accede a tu cuenta de Steady y sigue tu progreso.",
       },
     ],
   }),
@@ -71,7 +71,7 @@ function AuthPage() {
     <main className="flex min-h-screen flex-col justify-center bg-canvas px-5 py-10">
       <div className="mx-auto w-full max-w-md">
         <p className="text-2xl font-extrabold tracking-tight lowercase text-brand-gradient">
-          olmo gym
+          steady
         </p>
         <h1 className="mt-4 text-[2.1rem] leading-[1.05] font-extralight text-ink">
           Tu progreso,
@@ -80,7 +80,7 @@ function AuthPage() {
           </span>
         </h1>
 
-        <form onSubmit={enviar} className="olmo-card mt-7">
+        <form onSubmit={enviar} className="ui-card mt-7">
           <div className="mb-4 flex gap-1 rounded-pill bg-canvas-soft p-1.5">
             {(
               [
@@ -102,12 +102,12 @@ function AuthPage() {
             ))}
           </div>
 
-          <label className="olmo-label" htmlFor="email">
+          <label className="ui-label" htmlFor="email">
             Correo electrónico
           </label>
           <input
             id="email"
-            className="olmo-input"
+            className="ui-input"
             type="email"
             autoComplete="email"
             required
@@ -117,12 +117,12 @@ function AuthPage() {
 
           {modo !== "recuperar" ? (
             <div className="mt-3">
-              <label className="olmo-label" htmlFor="password">
+              <label className="ui-label" htmlFor="password">
                 Contraseña
               </label>
               <input
                 id="password"
-                className="olmo-input"
+                className="ui-input"
                 type="password"
                 autoComplete={modo === "registro" ? "new-password" : "current-password"}
                 required
@@ -133,7 +133,7 @@ function AuthPage() {
             </div>
           ) : null}
 
-          <button type="submit" className="olmo-cta mt-5 w-full" disabled={enviando}>
+          <button type="submit" className="ui-cta mt-5 w-full" disabled={enviando}>
             {modo === "entrar"
               ? "Iniciar sesión"
               : modo === "registro"

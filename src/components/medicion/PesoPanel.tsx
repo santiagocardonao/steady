@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { toast } from "sonner";
-import { Card, EstadoVacio, Metrica } from "@/components/olmo/AppShell";
+import { Card, EstadoVacio, Metrica } from "@/components/layout/AppShell";
 import {
   calcularIMC,
   categoriaIMC,
@@ -9,7 +9,7 @@ import {
   usePerfil,
   usePesos,
   useRegistrarPeso,
-} from "@/lib/olmo";
+} from "@/lib/data";
 
 export function PesoPanel() {
   const { data: perfil } = usePerfil();
@@ -42,12 +42,12 @@ export function PesoPanel() {
   return (
     <div className="space-y-4">
       <Card>
-        <label className="olmo-label" htmlFor="peso">
+        <label className="ui-label" htmlFor="peso">
           Peso (kg)
         </label>
         <input
           id="peso"
-          className="olmo-input text-2xl"
+          className="ui-input text-2xl"
           type="number"
           inputMode="decimal"
           step="0.1"
@@ -62,7 +62,7 @@ export function PesoPanel() {
         ) : null}
         <button
           type="button"
-          className="olmo-cta mt-4 w-full"
+          className="ui-cta mt-4 w-full"
           disabled={registrar.isPending}
           onClick={guardar}
         >

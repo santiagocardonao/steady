@@ -2,7 +2,7 @@ import { createFileRoute, useNavigate } from "@tanstack/react-router";
 import { useEffect, useState } from "react";
 import { toast } from "sonner";
 import { SignOut } from "@phosphor-icons/react";
-import { AppShell, Card, Metrica, PageHeader } from "@/components/olmo/AppShell";
+import { AppShell, Card, Metrica, PageHeader } from "@/components/layout/AppShell";
 import { supabase } from "@/integrations/supabase/client";
 import {
   calcularIMC,
@@ -11,21 +11,21 @@ import {
   usePerfil,
   usePesos,
   type Perfil,
-} from "@/lib/olmo";
+} from "@/lib/data";
 
 export const Route = createFileRoute("/perfil")({
   head: () => ({
     meta: [
-      { title: "Perfil — Olmo Gym" },
+      { title: "Perfil — Steady" },
       {
         name: "description",
         content:
           "Configura tu nombre, estatura, meta de peso, peso objetivo y meta diaria de agua, y revisa tu IMC actual.",
       },
-      { property: "og:title", content: "Perfil — Olmo Gym" },
+      { property: "og:title", content: "Perfil — Steady" },
       {
         property: "og:description",
-        content: "Tus datos, metas e IMC actual en Olmo Gym.",
+        content: "Tus datos, metas e IMC actual en Steady.",
       },
     ],
   }),
@@ -98,23 +98,23 @@ function PerfilPage() {
         </Card>
 
         <Card>
-          <label className="olmo-label" htmlFor="nombre">
+          <label className="ui-label" htmlFor="nombre">
             Nombre
           </label>
           <input
             id="nombre"
-            className="olmo-input"
+            className="ui-input"
             value={form.nombre ?? ""}
             onChange={(e) => setForm((f) => ({ ...f, nombre: e.target.value }))}
           />
 
           <div className="mt-3">
-            <label className="olmo-label" htmlFor="estatura">
+            <label className="ui-label" htmlFor="estatura">
               Estatura (cm)
             </label>
             <input
               id="estatura"
-              className="olmo-input"
+              className="ui-input"
               type="number"
               inputMode="numeric"
               value={form.estatura_cm ?? ""}
@@ -128,7 +128,7 @@ function PerfilPage() {
           </div>
 
           <div className="mt-4">
-            <span className="olmo-label">Meta de peso</span>
+            <span className="ui-label">Meta de peso</span>
             <div className="flex flex-wrap gap-2">
               {metas.map((m) => (
                 <button
@@ -149,12 +149,12 @@ function PerfilPage() {
           </div>
 
           <div className="mt-4">
-            <label className="olmo-label" htmlFor="objetivo">
+            <label className="ui-label" htmlFor="objetivo">
               Peso objetivo (kg) — opcional
             </label>
             <input
               id="objetivo"
-              className="olmo-input"
+              className="ui-input"
               type="number"
               inputMode="decimal"
               step="0.1"
@@ -169,12 +169,12 @@ function PerfilPage() {
           </div>
 
           <div className="mt-3">
-            <label className="olmo-label" htmlFor="agua">
+            <label className="ui-label" htmlFor="agua">
               Meta diaria de agua (vasos de 250 ml)
             </label>
             <input
               id="agua"
-              className="olmo-input"
+              className="ui-input"
               type="number"
               inputMode="numeric"
               min={1}
@@ -187,7 +187,7 @@ function PerfilPage() {
 
           <button
             type="button"
-            className="olmo-cta mt-5 w-full"
+            className="ui-cta mt-5 w-full"
             disabled={guardar.isPending}
             onClick={enviar}
           >
@@ -195,7 +195,7 @@ function PerfilPage() {
           </button>
         </Card>
 
-        <button type="button" className="olmo-btn-ghost w-full" onClick={salir}>
+        <button type="button" className="ui-btn-ghost w-full" onClick={salir}>
           <SignOut size={18} weight="fill" /> Cerrar sesión
         </button>
       </div>

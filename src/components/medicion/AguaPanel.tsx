@@ -1,7 +1,7 @@
 import { toast } from "sonner";
 import { Minus, Plus } from "@phosphor-icons/react";
-import { Card, EstadoVacio } from "@/components/olmo/AppShell";
-import { fechaCorta, hoyISO, useAgua, useGuardarAgua, usePerfil } from "@/lib/olmo";
+import { Card, EstadoVacio } from "@/components/layout/AppShell";
+import { fechaCorta, hoyISO, useAgua, useGuardarAgua, usePerfil } from "@/lib/data";
 
 export function AguaPanel() {
   const { data: perfil } = usePerfil();
@@ -58,7 +58,7 @@ export function AguaPanel() {
 
         <button
           type="button"
-          className="olmo-cta mt-5 w-full text-base"
+          className="ui-cta mt-5 w-full text-base"
           disabled={guardar.isPending}
           onClick={() => cambiar(1)}
         >
@@ -66,7 +66,7 @@ export function AguaPanel() {
         </button>
         <button
           type="button"
-          className="olmo-btn-ghost mt-3 w-full"
+          className="ui-btn-ghost mt-3 w-full"
           disabled={guardar.isPending || vasos === 0}
           onClick={() => cambiar(-1)}
         >

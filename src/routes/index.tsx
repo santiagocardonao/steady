@@ -1,6 +1,6 @@
 import { createFileRoute } from "@tanstack/react-router";
 import { useState } from "react";
-import { AppShell, PageHeader, SegmentedControl } from "@/components/olmo/AppShell";
+import { AppShell, PageHeader, SegmentedControl } from "@/components/layout/AppShell";
 import { PesoPanel } from "@/components/medicion/PesoPanel";
 import { AguaPanel } from "@/components/medicion/AguaPanel";
 import { EjerciciosPanel } from "@/components/medicion/EjerciciosPanel";
@@ -8,16 +8,16 @@ import { EjerciciosPanel } from "@/components/medicion/EjerciciosPanel";
 export const Route = createFileRoute("/")({
   head: () => ({
     meta: [
-      { title: "Medición — Olmo Gym" },
+      { title: "Medición — Steady" },
       {
         name: "description",
         content:
           "Registra en segundos tu peso corporal, los vasos de agua del día y cada ejercicio del gimnasio con series, peso y cardio.",
       },
-      { property: "og:title", content: "Medición — Olmo Gym" },
+      { property: "og:title", content: "Medición — Steady" },
       {
         property: "og:description",
-        content: "Registro rápido de peso, agua y ejercicios en Olmo Gym.",
+        content: "Registro rápido de peso, agua y ejercicios en Steady.",
       },
     ],
   }),

@@ -82,13 +82,13 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
         name: "viewport",
         content: "width=device-width, initial-scale=1, viewport-fit=cover",
       },
-      { title: "Olmo Gym — Seguimiento de gimnasio" },
+      { title: "Steady — Seguimiento de gimnasio" },
       {
         name: "description",
         content:
-          "Olmo Gym: registra peso, agua y ejercicios del gimnasio y sigue tu progreso con dashboards claros.",
+          "Steady: registra peso, agua y ejercicios del gimnasio y sigue tu progreso con dashboards claros.",
       },
-      { property: "og:title", content: "Olmo Gym — Seguimiento de gimnasio" },
+      { property: "og:title", content: "Steady — Seguimiento de gimnasio" },
       {
         property: "og:description",
         content: "Registra peso, agua y ejercicios, y sigue tu progreso día a día.",
@@ -97,7 +97,7 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
       { name: "twitter:card", content: "summary_large_image" },
       { name: "theme-color", content: "#7C3AED" },
       { name: "apple-mobile-web-app-capable", content: "yes" },
-      { name: "apple-mobile-web-app-title", content: "Olmo Gym" },
+      { name: "apple-mobile-web-app-title", content: "Steady" },
     ],
     links: [
       { rel: "stylesheet", href: appCss },

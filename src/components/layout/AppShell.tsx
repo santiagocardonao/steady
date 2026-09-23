@@ -68,7 +68,7 @@ export function PageHeader({
 }) {
   return (
     <header className="mb-6">
-      <span className="olmo-eyebrow">{eyebrow}</span>
+      <span className="ui-eyebrow">{eyebrow}</span>
       <h1 className="mt-3 text-[2rem] leading-[1.05] font-semibold text-brand-gradient">
         {titulo}
         {enfasis ? <span className="serif-emphasis"> {enfasis}</span> : null}
@@ -85,7 +85,7 @@ export function Card({
   children: ReactNode;
   className?: string;
 }) {
-  return <section className={`olmo-card ${className}`}>{children}</section>;
+  return <section className={`ui-card ${className}`}>{children}</section>;
 }
 
 export function SegmentedControl<T extends string>({

@@ -1,5 +1,5 @@
-/* Olmo Gym — service worker: app shell cache para señal intermitente */
-const CACHE = "olmo-gym-v1";
+/* Steady — service worker: app shell cache para señal intermitente */
+const CACHE = "ui-gym-v1";
 const SHELL = ["/", "/manifest.json", "/favicon.png", "/icon-192.png", "/icon-512.png"];
 
 self.addEventListener("install", (event) => {
