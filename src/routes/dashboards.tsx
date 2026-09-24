@@ -85,7 +85,7 @@ function DashboardsPage() {
   const pesosRango = (pesos ?? []).filter((p) => p.fecha >= desde);
   const aguaRango = (aguas ?? []).filter((a) => a.fecha >= desde);
 
-  /* 1. Frecuencia */
+  /* 1. Frequency */
   const diasEntrenados = useMemo(
     () => Array.from(new Set(entRango.map((e) => e.fecha))).sort(),
     [entRango],
@@ -101,14 +101,14 @@ function DashboardsPage() {
     [todosLosDias],
   );
 
-  /* 2. Peso */
+  /* 2. Weight */
   const pesoActual = pesos?.length ? pesos[pesos.length - 1]!.peso_kg : null;
   const cambio =
     pesosRango.length > 1 ? pesosRango[pesosRango.length - 1]!.peso_kg - pesosRango[0]!.peso_kg : 0;
   const falta =
     perfil?.peso_objetivo_kg && pesoActual ? pesoActual - perfil.peso_objetivo_kg : null;
 
-  /* 3. Agua */
+  /* 3. Water */
   const meta = perfil?.meta_agua_vasos ?? 8;
   const promedioVasos = aguaRango.length
     ? aguaRango.reduce((s, a) => s + a.vasos, 0) / aguaRango.length
@@ -132,7 +132,7 @@ function DashboardsPage() {
   const rpes = cardio.filter((c) => c.rpe != null).map((c) => c.rpe!);
   const rpePromedio = rpes.length ? rpes.reduce((s, r) => s + r, 0) / rpes.length : null;
 
-  /* 5. Progresión de fuerza */
+  /* 5. Strength progression */
   const ejerciciosFuerza = useMemo(() => {
     const ids = new Set(
       (entrenamientos ?? []).filter((e) => e.tipo === "fuerza").map((e) => e.ejercicio_id),

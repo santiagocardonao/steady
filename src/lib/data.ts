@@ -67,7 +67,7 @@ export function categoriaIMC(imc: number) {
   return "Obesidad";
 }
 
-/* ---------- Perfil ---------- */
+/* ---------- Profile ---------- */
 
 export function usePerfil() {
   const { user } = useAuth();
@@ -100,7 +100,7 @@ export function useGuardarPerfil() {
   });
 }
 
-/* ---------- Catálogo ---------- */
+/* ---------- Catalogue ---------- */
 
 export function useCategorias() {
   return useQuery({
@@ -149,7 +149,7 @@ export function useCrearEjercicio() {
   });
 }
 
-/* ---------- Peso corporal ---------- */
+/* ---------- Body weight ---------- */
 
 export function usePesos() {
   const { user } = useAuth();
@@ -181,7 +181,7 @@ export function useRegistrarPeso() {
   });
 }
 
-/* ---------- Agua ---------- */
+/* ---------- Water ---------- */
 
 export function useAgua() {
   const { user } = useAuth();
@@ -216,7 +216,7 @@ export function useGuardarAgua() {
   });
 }
 
-/* ---------- Entrenamientos ---------- */
+/* ---------- Workouts ---------- */
 
 export function useEntrenamientos() {
   const { user } = useAuth();

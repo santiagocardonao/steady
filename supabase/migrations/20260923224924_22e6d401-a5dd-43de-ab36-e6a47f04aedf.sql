@@ -42,17 +42,17 @@ begin
     f := current_date - d;
     prog := (55 - d)::numeric / 55;
 
-    -- Agua diaria
+    -- Daily water
     insert into agua (user_id, fecha, vasos) values (uid, f,
       case when random() < 0.6 then 8 + floor(random()*2)::int else 5 + floor(random()*3)::int end);
 
-    -- Peso 3-4 por semana
+    -- Weight 3-4 times a week
     if d % 7 in (0, 2, 4) or (d % 14 = 6) then
       insert into peso_corporal (user_id, fecha, peso_kg)
       values (uid, f, round((84 - 2.5*prog + (random()*0.6 - 0.3))::numeric, 1));
     end if;
 
-    -- Entrenamientos: hoy y 3 días antes; racha mejor (7 días) hace ~5 semanas; resto 3-4/semana
+    -- Workouts: today and 3 days ago; best streak (7 days) ~5 weeks ago; otherwise 3-4/week
     if d <= 3 or d between 34 and 40 or (d > 3 and d % 7 in (1, 3, 5)) or (d > 3 and d % 14 = 6) then
       n := n + 1;
       for i in select unnest(array[((n*2) % 5) + 1, ((n*2+1) % 5) + 1]) loop

@@ -3,12 +3,12 @@
 @import "tw-animate-css";
 
 /*
- * Sistema de diseño Steady — solo modo claro.
- * Violeta → índigo, canvas gris claro, tarjetas blancas, pills y sombras suaves.
+ * Steady design system — light mode only.
+ * Violet → indigo, light-gray canvas, white cards, pills and soft shadows.
  */
 
 :root {
-  /* Marca: violeta → índigo */
+  /* Brand: violet → indigo */
   --violet: #7c3aed;
   --violet-strong: #6d28d9;
   --violet-soft: #8b5cf6;
@@ -19,7 +19,7 @@
   --grad-brand: linear-gradient(98deg, #7c3aed 0%, #4338ca 60%, #312e81 100%);
   --grad-button: linear-gradient(135deg, #8b5cf6 0%, #6d28d9 100%);
 
-  /* Tinta y neutros */
+  /* Ink and neutrals */
   --ink: #111111;
   --ink-soft: #2a2a2e;
   --gray-700: #4b5563;
@@ -28,16 +28,16 @@
   --gray-300: #d1d5db;
   --gray-200: #e5e7eb;
 
-  /* Superficies */
+  /* Surfaces */
   --canvas: #efefef;
   --canvas-soft: #f4f4f5;
   --white: #ffffff;
 
-  /* Funcionales */
+  /* Functional */
   --online: #22c55e;
   --signal-red: #dc2626;
 
-  /* Radios */
+  /* Radii */
   --radius: 14px;
   --radius-sm: 8px;
   --radius-md: 14px;
@@ -45,19 +45,19 @@
   --radius-xl: 28px;
   --radius-pill: 999px;
 
-  /* Sombras */
+  /* Shadows */
   --shadow-sm: 0 1px 2px rgba(17, 17, 17, 0.04), 0 1px 3px rgba(17, 17, 17, 0.05);
   --shadow-md: 0 4px 12px rgba(17, 17, 17, 0.05), 0 2px 4px rgba(17, 17, 17, 0.04);
   --shadow-lg: 0 18px 40px rgba(17, 17, 17, 0.08), 0 6px 14px rgba(17, 17, 17, 0.05);
   --shadow-pill: 0 2px 6px rgba(17, 17, 17, 0.06), 0 1px 2px rgba(17, 17, 17, 0.05);
   --shadow-brand: 0 8px 22px rgba(124, 58, 237, 0.35);
 
-  /* Movimiento */
+  /* Motion */
   --ease-out: cubic-bezier(0.22, 1, 0.36, 1);
   --dur-fast: 150ms;
   --dur-base: 220ms;
 
-  /* Tokens semánticos (shadcn) mapeados a Steady */
+  /* Semantic tokens (shadcn) mapped to Steady */
   --background: var(--canvas);
   --foreground: var(--ink);
   --card: var(--white);
@@ -189,7 +189,7 @@
   }
 }
 
-/* Titular con degradado de marca sobre el texto */
+/* Headline with the brand gradient clipped to the text */
 @utility text-brand-gradient {
   background-image: var(--grad-brand);
   -webkit-background-clip: text;

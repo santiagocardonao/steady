@@ -135,7 +135,7 @@ function RootShell({ children }: { children: ReactNode }) {
 function RootComponent() {
   const { queryClient } = Route.useRouteContext();
 
-  // PWA: registra el service worker tras la hidratación (solo producción).
+  // PWA: registers the service worker after hydration (production only).
   useEffect(() => {
     if (import.meta.env.PROD && "serviceWorker" in navigator) {
       navigator.serviceWorker.register("/sw.js").catch(() => {});

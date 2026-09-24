@@ -1,4 +1,4 @@
-/* Steady — service worker: app shell cache para señal intermitente */
+/* Steady — service worker: app shell cache for patchy signal */
 const CACHE = "ui-gym-v1";
 const SHELL = ["/", "/manifest.json", "/favicon.png", "/icon-192.png", "/icon-512.png", "/icon-maskable-512.png"];
 
@@ -25,10 +25,10 @@ self.addEventListener("fetch", (event) => {
   if (request.method !== "GET") return;
 
   const url = new URL(request.url);
-  // Solo tráfico propio: las llamadas a la API (origen externo) no se cachean.
+  // Same-origin traffic only: API calls (external origin) are not cached.
   if (url.origin !== self.location.origin) return;
 
-  // Navegación: red primero, app shell cacheada como respaldo (funciona sin señal).
+  // Navigation: network first, cached app shell as fallback (works without signal).
   if (request.mode === "navigate") {
     event.respondWith(
       fetch(request)
@@ -42,7 +42,7 @@ self.addEventListener("fetch", (event) => {
     return;
   }
 
-  // Recursos estáticos: caché primero, y se rellenan al primer uso.
+  // Static assets: cache first, filled on first use.
   event.respondWith(
     caches.match(request).then(
       (cacheado) =>

@@ -114,7 +114,7 @@ export function EjerciciosPanel() {
     }
   };
 
-  /* Paso 1: categoría */
+  /* Step 1: category */
   if (!categoria) {
     return (
       <div className="space-y-4">
@@ -145,7 +145,7 @@ export function EjerciciosPanel() {
 
   const ejerciciosCategoria = (ejercicios ?? []).filter((e) => e.categoria_id === categoria.id);
 
-  /* Paso 2: ejercicio */
+  /* Step 2: exercise */
   if (!ejercicio) {
     return (
       <div className="space-y-4">
@@ -207,7 +207,7 @@ export function EjerciciosPanel() {
     );
   }
 
-  /* Paso 3: registro */
+  /* Step 3: log */
   return (
     <div className="space-y-4">
       <Card>
