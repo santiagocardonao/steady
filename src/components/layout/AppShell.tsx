@@ -13,6 +13,8 @@ const enlaces = [
   { to: "/", etiqueta: "Medición", Icono: PlusCircle },
 ] as const;
 
+let yendoARegistro = false;
+
 export function AppShell({ children }: { children: ReactNode }) {
   const { session, cargando } = useAuth();
   const navigate = useNavigate();
@@ -23,7 +25,7 @@ export function AppShell({ children }: { children: ReactNode }) {
   const esDemo = !!session?.user.is_anonymous;
 
   useEffect(() => {
-    if (!cargando && !session) navigate({ to: "/auth", replace: true });
+    if (!cargando && !session && !yendoARegistro) navigate({ to: "/auth", replace: true });
   }, [cargando, session, navigate]);
 
   if (cargando || !session) {
@@ -46,9 +48,10 @@ export function AppShell({ children }: { children: ReactNode }) {
   }
 
   const crearCuenta = async () => {
+    yendoARegistro = true;
     await supabase.auth.signOut();
     qc.clear();
-    navigate({ to: "/auth", search: { modo: "registro" } as never });
+    window.location.assign("/auth?modo=registro");
   };
 
   return (
