@@ -50,6 +50,8 @@ The interface is in Spanish because its first user lives in Medellín, Colombia.
 
 ### Data model
 
+Table and column names are in Spanish, as they are in the live database: `perfiles` profiles · `categorias` categories · `ejercicios` exercises · `entrenamientos` workouts · `series` sets · `peso_corporal` body weight · `agua` water (`vasos` glasses) · `fecha` date · `fuerza` strength.
+
 ```mermaid
 erDiagram
     AUTH_USERS ||--|| PERFILES : has
