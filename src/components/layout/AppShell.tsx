@@ -48,7 +48,7 @@ export function AppShell({ children }: { children: ReactNode }) {
   const crearCuenta = async () => {
     await supabase.auth.signOut();
     qc.clear();
-    navigate({ to: "/auth", search: { modo: "registro" } as never });
+    window.location.assign("/auth?modo=registro");
   };
 
   return (
