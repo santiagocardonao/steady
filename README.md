@@ -143,6 +143,12 @@ npm run dev
 
 The app reads `VITE_SUPABASE_URL` and `VITE_SUPABASE_PUBLISHABLE_KEY` from `.env`. To use your own Supabase project, apply the migrations in `supabase/migrations` and enable anonymous sign-ins for the demo.
 
+The `.env` file is committed on purpose. It holds only the project URL and the publishable key, which the browser receives anyway; Row Level Security protects the data, and no secret or service-role key is in this repository.
+
+## License
+
+MIT. See [LICENSE](LICENSE).
+
 ---
 
 Built by **Santiago Cardona Ortiz** · [GitHub](https://github.com/santiagocardonao) · [LinkedIn](https://www.linkedin.com/in/scardonaortiz)
