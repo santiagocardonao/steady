@@ -6,6 +6,18 @@ Steady is a mobile web app for tracking gym progress: strength sets, body weight
 
 **[Open the app](https://steady-gym.lovable.app)** · **[About](https://steady-gym.lovable.app/about)** · Use **"Probar la demo"** on the login screen to explore it with sample data. No sign-up needed.
 
+<table><tr>
+<td width="33%"><img src="docs/img/water.png" alt="Daily log: water intake ring with a one-tap +1 glass button"></td>
+<td width="33%"><img src="docs/img/weight.png" alt="Body weight trend with distance to goal"></td>
+<td width="33%"><img src="docs/img/frequency.png" alt="Training frequency: days trained, streaks and a monthly calendar"></td>
+</tr><tr>
+<td><sub>Log the day in a few taps</sub></td>
+<td><sub>Weight trend and goal</sub></td>
+<td><sub>Training frequency and streaks</sub></td>
+</tr></table>
+
+<sub>Screenshots from the demo account, with sample data.</sub>
+
 ---
 
 ## The problem
